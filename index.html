@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>Growth Audit — Unreels</title>
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: only dark;
+  /* ---- Unreels, extracted from their live iOS screens ---- */
+  --ur-bg:#000000; --ur-card:#141414; --ur-card2:#2E2E2E; --ur-line:#2A2A2A;
+  --ur-lime:#C8FF00; --ur-lime-txt:#C8FF00; --ur-pink:#FFA8DC; --ur-star:#FFC93C;
+  --ur-ink:#FFFFFF; --ur-ink2:#E6E6E6; --ur-muted:#8E8E93; --ur-dot:#3A3A3C;
+  --ur-plan-on:#151A05;
+  --r-ctl:16px; --r-media:15px;
+  /* ---- the report shell, in Unreels' own palette (dark app → dark shell) ---- */
+  --bg:#050505; --bg2:#101010; --surf:#121212;
+  --hair:rgba(255,255,255,.09); --hair2:rgba(255,255,255,.18);
+  --ink:#FFFFFF; --ink2:#B9B9BC; --ink3:#7C7C80;
+  --accent:#C8FF00; --accent-lift:#C8FF00; --on-accent:#000000;
+  --panel:#FFFFFF; --panel-ink:#121212; --panel-muted:#5F6166; --panel-line:#E9E9EB;
+  --accent-ink:#4E6B00;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 20px}}
+h1,h2,h3,h4,.idea h3{font-family:'Montserrat',sans-serif}
+
+/* ============ top bar ============ */
+.nav{position:sticky;top:0;z-index:70;background:rgba(5,5,5,.86);backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid var(--hair)}
+.nav-in{max-width:1080px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;gap:18px}
+@media(max-width:700px){.nav-in{padding:0 20px;gap:12px}}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.nav-brand img{width:26px;height:26px;border-radius:7px;display:block;flex:none}
+.nav-brand span{color:var(--ink2);font-weight:500}
+.nav-brand b{color:var(--ink);font-weight:600}
+.nav-links{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav-links button{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3);transition:.16s}
+.nav-links button:hover{color:var(--ink)}
+.nav-links button.on{color:var(--on-accent);background:var(--accent)}
+@media(max-width:640px){.nav-brand span{display:none}}
+
+.view{display:none}
+.view.on{display:block}
+
+/* ============ hero ============ */
+.hero{padding:104px 0 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-340px;left:50%;transform:translateX(-50%);
+  width:1100px;height:640px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(200,255,0,.17),transparent 72%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(36% 46% at 8% 22%,rgba(255,168,220,.13),transparent 70%),
+   radial-gradient(36% 44% at 92% 18%,rgba(200,255,0,.08),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lift);margin-bottom:26px}
+.hero h1{font-size:76px;line-height:.98;font-weight:800;letter-spacing:-.045em;margin:0 0 24px}
+@media(max-width:820px){.hero h1{font-size:50px}.hero{padding-top:70px}}
+.hero .lede{font-size:20px;line-height:1.5;font-weight:400;color:var(--ink2);max-width:600px;margin:0 auto;letter-spacing:-.012em}
+@media(max-width:820px){.hero .lede{font-size:17px}}
+.hero .meta{margin-top:30px;font-size:12.5px;color:var(--ink3);letter-spacing:.02em}
+.hero .meta b{color:var(--ink2);font-weight:600}
+
+.stats{display:flex;justify-content:center;gap:0;margin:70px auto 0;max-width:760px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stat{flex:1;padding:26px 14px;text-align:center;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font:700 26px/1.3 'Montserrat',sans-serif;letter-spacing:-.03em;color:var(--ink)}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35}
+@media(max-width:700px){.stat b{font-size:19px}.stat{padding:18px 8px}}
+
+.fb{max-width:760px;margin:0 auto;padding:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left}
+@media(max-width:700px){.fb{grid-template-columns:1fr;gap:20px;padding-top:24px}}
+.fb-k{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);text-align:center;margin-bottom:-6px}
+.fb-i{display:flex;gap:12px;align-items:flex-start}
+.fb-i .tick{width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(200,255,0,.16);
+  display:grid;place-items:center}
+.fb-i .tick svg{width:10px;height:10px;stroke:var(--accent-lift);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.fb-i p{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+.fb-i p b{color:var(--ink);font-weight:700}
+
+.sec{padding:96px 0}
+.sec-k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.sec h2{font-size:38px;line-height:1.16;font-weight:700;letter-spacing:-.035em;margin:0 0 20px;max-width:700px}
+@media(max-width:820px){.sec h2{font-size:28px}.sec{padding:64px 0}}
+.sec p.body{font-size:17px;line-height:1.66;color:var(--ink2);max-width:640px;margin:0 0 18px;letter-spacing:-.008em}
+.sec p.body b{color:var(--ink);font-weight:600}
+.rule{height:1px;background:var(--hair);margin:0}
+
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;max-width:820px}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+.note{background:var(--surf);border:1px solid var(--hair);border-radius:16px;padding:24px 26px}
+.note h4{font-size:15px;font-weight:700;letter-spacing:-.015em;margin:0 0 8px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
+
+.ideas{display:flex;flex-direction:column;gap:0;margin-top:14px;border-top:1px solid var(--hair)}
+.idea{display:grid;grid-template-columns:52px 1fr 180px;gap:26px;align-items:start;
+  padding:30px 4px;border-bottom:1px solid var(--hair);text-align:left;width:100%;transition:.18s}
+.idea:hover{background:rgba(255,255,255,.035)}
+@media(max-width:780px){.idea{grid-template-columns:38px 1fr;gap:16px}}
+.idea .no{font-size:13px;font-weight:700;color:var(--ink3);padding-top:4px;letter-spacing:.02em}
+.idea h3{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.024em;margin:0 0 7px}
+@media(max-width:820px){.idea h3{font-size:18px}}
+.idea p{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;max-width:560px}
+.idea .out{text-align:right;padding-top:3px}
+@media(max-width:780px){.idea .out{grid-column:2;text-align:left;padding-top:12px}}
+.idea .out b{display:block;font:700 19px/1.3 'Montserrat',sans-serif;letter-spacing:-.025em;color:var(--accent-lift);white-space:nowrap}
+.idea .out span{display:block;font-size:10.5px;color:var(--ink3);margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.idea .seeit{display:inline-flex;align-items:center;gap:5px;margin-top:11px;font-size:12.5px;
+  font-weight:600;color:var(--accent-lift)}
+.idea .seeit svg{width:12px;height:12px}
+
+.band{background:var(--surf);border:1px solid var(--hair);border-radius:28px;padding:40px 44px;margin-top:44px;
+  display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+@media(max-width:700px){.band{padding:28px 24px;gap:22px}}
+.band .lab{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.band .txt{flex:1;min-width:240px}
+.band .txt p{font-size:15.5px;line-height:1.6;color:var(--ink2);margin:0}
+.band .nums{display:flex;gap:34px}
+.band .nums div b{display:block;font:700 30px/1.2 'Montserrat',sans-serif;letter-spacing:-.035em;color:var(--accent-lift)}
+.band .nums div span{display:block;font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:.04em;
+  text-transform:uppercase;font-weight:600}
+
+.cta-row{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;margin-top:52px}
+.bigbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--on-accent);
+  font-size:15px;font-weight:700;letter-spacing:-.01em;padding:15px 26px;border-radius:30px;transition:.16s;
+  box-shadow:0 0 26px -6px rgba(200,255,0,.55)}
+.bigbtn:hover{filter:brightness(1.06)}
+.bigbtn svg{width:15px;height:15px}
+
+.foot{border-top:1px solid var(--hair);padding:36px 0 70px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+
+/* ============ prototype stage ============ */
+.stage{display:grid;grid-template-columns:minmax(440px,1fr) minmax(400px,470px);gap:0;
+  align-items:start;min-height:calc(100vh - 58px)}
+@media(max-width:1080px){.stage{grid-template-columns:1fr}}
+.phonecol{padding:34px 24px 46px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.panelcol{border-left:1px solid var(--hair);background:var(--panel);color:var(--panel-ink);
+  min-height:calc(100vh - 58px);position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto}
+@media(max-width:1080px){.panelcol{position:static;max-height:none;border-left:none;border-top:1px solid var(--hair)}}
+
+.phone{position:relative;width:390px;height:844px;flex:none;background:#000;border:11px solid #000;
+  border-radius:46px;box-shadow:0 0 0 1.5px #2C2C2E,0 34px 80px -24px rgba(200,255,0,.16)}
+.phone-in{position:absolute;inset:0;border-radius:36px;overflow:hidden;background:var(--ur-bg);color-scheme:only dark}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;
+  border-radius:16px;z-index:60;pointer-events:none}
+.sbar{position:absolute;top:0;left:0;right:0;height:50px;z-index:55;pointer-events:none;display:flex;
+  align-items:center;justify-content:space-between;padding:14px 28px 0 34px;font:600 15px/1 'Inter',sans-serif;color:#fff;transition:color .3s}
+.sbar.dk{color:#111}
+.sbar .glyphs{display:flex;gap:5px;align-items:center}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;
+  border-radius:3px;background:rgba(255,255,255,.9);z-index:56;pointer-events:none;transition:background .3s}
+.homebar.dk{background:#111}
+.screenwrap{position:absolute;inset:0;overflow:hidden;background:var(--ur-bg)}
+
+/* ============ phone screens — Unreels' system, all prefixed scr-/ur- ============ */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--ur-bg);color:var(--ur-ink);
+  font-family:'Montserrat',-apple-system,sans-serif;
+  transform:translateX(100%);transition:transform .36s cubic-bezier(.32,.72,0,1);z-index:10;will-change:transform}
+.scr.is-active{transform:translateX(0);z-index:20}
+.scr.is-past{transform:translateX(-24%)}
+.scr.sheet{transform:translateY(100%)}
+.scr.sheet.is-active{transform:translateY(0);z-index:30}
+.scr.nofx{transition:none}
+.scr-top{flex:none;padding:62px 22px 0;position:relative;z-index:2}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 22px;scrollbar-width:none;position:relative;z-index:2}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-body.dock{display:flex;flex-direction:column}
+.scr-foot{flex:none;padding:12px 22px 30px;position:relative;z-index:2}
+
+.ur-h{font-size:29px;line-height:1.2;font-weight:700;letter-spacing:-.01em;margin:26px 0 0;text-align:center;color:var(--ur-ink)}
+.lime{color:var(--ur-lime-txt)}
+.ur-btn{display:block;width:100%;height:54px;border-radius:var(--r-ctl);background:var(--ur-lime);color:#000;
+  font:600 16.5px/1 'Montserrat',sans-serif;letter-spacing:.02em;transition:filter .15s,opacity .2s;
+  box-shadow:0 0 22px -2px rgba(200,255,0,.55)}
+.ur-btn:hover{filter:brightness(1.04)}
+.ur-btn[disabled]{opacity:.35;box-shadow:none;cursor:default}
+.ur-btn.sc{letter-spacing:0;font-weight:600;font-size:17px}
+.ur-helper{font-size:12.5px;line-height:1.4;color:var(--ur-muted);text-align:center;margin:10px 0 0;font-weight:500}
+.ur-legal{display:flex;justify-content:center;gap:26px;margin-top:12px}
+.ur-legal a{font-size:12.5px;color:var(--ur-muted);text-decoration:none;font-weight:500}
+
+/* their pager dots */
+.ur-dots{display:flex;gap:9px;justify-content:center;align-items:center;margin:18px 0 6px}
+.ur-dots i{width:8px;height:8px;border-radius:50%;background:var(--ur-dot);display:block}
+.ur-dots i.on{background:var(--ur-lime)}
+.ur-dots i.s{width:6px;height:6px} .ur-dots i.xs{width:4px;height:4px}
+
+/* welcome */
+.scr--photo{--ur-bg:#000;--ur-ink:#fff;--ur-ink2:#E6E6E6;--ur-muted:#8E8E93;--ur-lime-txt:#C8FF00;--ur-dot:#3A3A3C;--ur-card:#141414;--ur-card2:#2E2E2E;--ur-plan-on:#151A05;--ur-line:#2A2A2A}
+.ur-wphoto{position:absolute;left:0;right:0;top:0;height:520px;z-index:1;pointer-events:none}
+.ur-wphoto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.ur-wphoto::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 46%,rgba(0,0,0,.75) 78%,#000 100%)}
+.ur-wh{font-size:30px;line-height:1.18;font-weight:700;text-align:center;color:#fff;margin:0 4px}
+.ur-wsub{font-size:15px;font-weight:500;color:#E6E6E6;text-align:center;margin-top:8px}
+.ur-laurel{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px}
+.ur-laurel svg{width:30px;height:58px;fill:#fff;color:#fff}
+.ur-laurel .r{transform:scaleX(-1)}
+.ur-laurel div{text-align:center;color:#fff}
+.ur-laurel b{display:block;font-size:44px;font-weight:700;line-height:1;letter-spacing:-.01em}
+.ur-laurel span{display:block;font-size:15px;font-weight:600;margin-top:2px}
+
+/* option rows (role, goals) */
+.ur-rows{display:flex;flex-direction:column;gap:23px;margin-top:30px}
+.ur-row{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:53px;border-radius:var(--r-ctl);
+  background:var(--ur-card);border:2px solid transparent;font:600 17px/1.2 'Montserrat',sans-serif;color:var(--ur-ink);transition:.15s}
+.ur-row.on{border-color:var(--ur-lime);background:var(--ur-plan-on)}
+.ur-rows.tight{gap:21px}
+/* niche chips */
+.ur-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;justify-content:flex-start}
+.ur-chip{height:47px;padding:0 15px;border-radius:12px;background:var(--ur-card);border:2px solid transparent;
+  font:600 15.5px/1 'Montserrat',sans-serif;color:var(--ur-ink);display:flex;align-items:center;gap:7px;transition:.15s}
+.ur-chip.on{border-color:var(--ur-lime);background:var(--ur-plan-on)}
+/* try-first tiles */
+.ur-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.ur-tile{position:relative;height:218px;border-radius:var(--r-media);overflow:hidden;border:2px solid rgba(255,255,255,.12);display:block;width:100%;background:#1A1A1A;transition:border-color .15s}
+.ur-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ur-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.85))}
+.ur-tile span{position:absolute;left:6px;right:6px;bottom:10px;z-index:2;font:600 13.5px/1.2 'Montserrat',sans-serif;color:#fff;text-align:center}
+.ur-tile:not(.on) span{color:rgba(255,255,255,.62)}
+.ur-tile.on{border-color:var(--ur-lime)}
+
+/* loader — their gradient bars */
+.ur-lh{font-size:31px;line-height:1.18;font-weight:700;text-align:center;margin:24px 0 0;color:var(--ur-ink)}
+.ur-bars{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.ur-bar .row{display:flex;align-items:center;justify-content:space-between;gap:10px;font:600 15.5px/1.25 'Montserrat',sans-serif;color:var(--ur-muted);transition:color .3s}
+.ur-bar .row .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ur-bar.go .row,.ur-bar.done .row{color:var(--ur-ink)}
+.ur-bar .pc{flex:none;font-weight:600}
+.ur-bar .ck{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ur-pink);display:none;place-items:center}
+.ur-bar .ck svg{width:12px;height:12px;stroke:#fff;stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ur-bar.done .ck{display:grid} .ur-bar.done .pc{display:none}
+.ur-bar .trk{height:12px;border-radius:6px;background:var(--ur-card2);margin-top:9px;overflow:hidden}
+.ur-bar .trk i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#C8FF00 0%,#FFFFFF 50%,#FFA8DC 100%);background-size:322px 100%}
+.ur-q{background:var(--ur-card2);border-radius:20px;padding:18px 18px 16px;margin:34px 4px 0;text-align:center}
+.ur-stars{color:var(--ur-star);font-size:20px;letter-spacing:3px;line-height:1}
+.ur-q p{font-size:14px;line-height:1.5;font-weight:500;color:var(--ur-ink);margin-top:12px}
+.ur-q b{display:block;font-size:12px;font-weight:600;color:var(--ur-muted);margin-top:10px}
+.ur-ready{font-size:34px;font-weight:700;text-align:center;color:var(--ur-ink);margin:0 0 14px;opacity:0;transition:opacity .3s}
+.scr--load .ur-btn{opacity:0;pointer-events:none;transition:opacity .3s}
+.scr--load.ready .ur-btn,.scr--load.ready .ur-ready{opacity:1;pointer-events:auto}
+
+/* payoff */
+.ur-tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 -6px}
+.ur-tg{position:relative;border-radius:var(--r-media);overflow:hidden;height:204px;background:#1A1A1A}
+.ur-tg img{width:100%;height:100%;object-fit:cover;display:block}
+.ur-tg.first{outline:2px solid var(--ur-lime);outline-offset:-2px}
+.ur-tg .tag{position:absolute;left:8px;right:8px;top:8px;line-height:1.25 !important;background:var(--ur-lime);color:#000;border-radius:8px;padding:5px 8px;font:700 11px/1 'Montserrat',sans-serif}
+.ur-big{font-size:48px;line-height:1;font-weight:700;color:var(--ur-lime-txt);text-align:center;margin-top:16px}
+.ur-bigs{font-size:24px;line-height:1.2;font-weight:700;text-align:center;color:var(--ur-ink);margin-top:6px}
+.ur-crit{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.ur-crit span{height:32px;padding:0 11px;border-radius:10px;background:var(--ur-card);display:flex;align-items:center;gap:6px;font:600 13px/1 'Montserrat',sans-serif;color:var(--ur-ink)}
+
+/* paywall */
+.ur-pphoto{position:absolute;left:0;right:0;top:0;height:560px;z-index:0;pointer-events:none;overflow:hidden}
+.ur-pphoto img{width:100%;display:block}
+.ur-pphoto::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.35) 38%,rgba(0,0,0,.88) 72%,#000 100%)}
+.ur-x{position:absolute;left:16px;top:60px;width:36px;height:36px;display:grid;place-items:center;color:#fff;z-index:5}
+.ur-x svg{width:20px;height:20px}
+.scr--pay .scr-top{padding:0}
+.ur-pill{align-self:center;background:rgba(20,20,20,.82);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:7px 12px;font:600 12.5px/1 'Montserrat',sans-serif;color:#fff;margin-bottom:10px}
+.ur-payh{font-size:27px;line-height:1.16;font-weight:700;text-align:center;color:#fff;margin:0 2px}
+.ur-paysub{font-size:14px;font-weight:500;color:#D0D0D0;text-align:center;margin-top:6px}
+.ur-proof{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px}
+.ur-proof svg{width:17px;height:33px;fill:#fff;color:#fff}
+.ur-proof .r{transform:scaleX(-1)}
+.ur-proof b{font-size:25px;font-weight:700;color:#fff;line-height:1}
+.ur-proof span{font-size:13px;font-weight:600;color:#fff;line-height:1.15;text-align:left}
+.ur-proof .st{color:var(--ur-star);font-size:12px;letter-spacing:1px;display:block}
+.ur-pq{margin-top:10px;text-align:center;min-height:86px}
+.ur-pq p{font-size:13.5px;line-height:1.45;font-weight:500;color:#fff}
+.ur-pq b{display:block;font-size:12px;font-weight:500;color:#A0A0A5;margin-top:6px}
+.ur-pdots{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.ur-pdots i{width:7px;height:7px;border-radius:50%;background:#4A4A4C}
+.ur-pdots i.on{background:#fff}
+.ur-plans{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.ur-plan{position:relative;display:flex;align-items:center;gap:12px;width:100%;text-align:left;height:66px;
+  background:#1C1C1E;border:2px solid transparent;border-radius:var(--r-ctl);padding:0 16px;transition:.15s}
+.ur-plan.on{border-color:var(--ur-lime);background:var(--ur-plan-on)}
+.ur-radio{width:24px;height:24px;flex:none;border-radius:50%;border:2px solid #5A5A5E;display:grid;place-items:center}
+.ur-plan.on .ur-radio{border-color:var(--ur-lime)}
+.ur-radio i{width:14px;height:14px;border-radius:50%;background:var(--ur-lime);opacity:0}
+.ur-plan.on .ur-radio i{opacity:1}
+.ur-plan .nm{flex:1;min-width:0}
+.ur-plan .t{display:block;font:600 17px/1.15 'Montserrat',sans-serif;color:#fff}
+.ur-plan .s{display:block;white-space:nowrap;font:600 13.5px/1.2 'Montserrat',sans-serif;color:#C8FF00;margin-top:3px}
+.ur-plan .s.mut{color:#A0A0A5}
+.ur-plan .p{flex:none;font:500 14px/1 'Montserrat',sans-serif;color:#fff}
+.ur-save{position:absolute;right:14px;top:-12px;background:var(--ur-lime);color:#000;border-radius:10px;padding:4px 10px;font:600 12.5px/1.1 'Montserrat',sans-serif}
+.scr--pay .scr-foot{padding:10px 20px 22px}
+
+/* offer — comparison-led, direct purchase */
+.scr--offer .ur-x{color:var(--ur-ink)}
+.ur-oh{font-size:31px;line-height:1.16;font-weight:700;text-align:center;color:var(--ur-ink);margin:102px 0 0}
+.ur-osub{font-size:15px;font-weight:500;color:var(--ur-muted);text-align:center;margin-top:9px}
+.ur-cmp{background:var(--ur-card);border-radius:20px;padding:18px 16px;margin-top:24px}
+.ur-cmp .row{display:flex;justify-content:space-between;align-items:baseline;font:600 14.5px/1.2 'Montserrat',sans-serif;color:var(--ur-ink)}
+.ur-cmp .row span{color:var(--ur-muted);font-weight:500}
+.ur-cmp .row b{font-weight:700}
+.ur-cmp .trk{height:12px;border-radius:6px;background:var(--ur-card2);margin:9px 0 16px;overflow:hidden}
+.ur-cmp .trk i{display:block;height:100%;border-radius:6px}
+.ur-cmp .trk .w{width:100%;background:#5A5A5E}
+.ur-cmp .trk .m{width:46%;background:linear-gradient(90deg,#C8FF00,#FFFFFF 70%,#FFA8DC)}
+.ur-cmp .less{display:inline-block;background:var(--ur-lime);color:#000;border-radius:10px;padding:5px 10px;font:700 13px/1 'Montserrat',sans-serif}
+.ur-cmp .lessrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ur-cmp .lessrow small{font:500 12px/1.3 'Montserrat',sans-serif;color:var(--ur-muted);text-align:right}
+.ur-oready{display:flex;align-items:center;gap:10px;margin-top:14px;background:var(--ur-card);border-radius:16px;padding:12px 14px;font:600 14px/1.3 'Montserrat',sans-serif;color:var(--ur-ink)}
+.ur-oready i{font-style:normal;font-size:18px}
+.scr--offer .ur-plan{margin-top:16px;cursor:default;background:var(--ur-plan-on)}
+.scr--offer .ur-plan .t{color:var(--ur-ink)} .scr--offer .ur-plan .p{color:var(--ur-ink)}
+
+/* done (stand-in for the store sheet) */
+.ur-done{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
+.ur-done .c{width:84px;height:84px;border-radius:50%;background:var(--ur-lime);display:grid;place-items:center;box-shadow:0 0 30px -4px rgba(200,255,0,.6)}
+.ur-done .c svg{width:40px;height:40px;stroke:#000;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ur-done h2{font-size:30px;font-weight:700;margin-top:24px;color:var(--ur-ink)}
+.ur-done p{font-size:15px;font-weight:500;color:var(--ur-muted);margin-top:8px}
+
+/* light mode — an approximation: Unreels ships dark only in the frames we saw */
+.phone-in.light{--ur-bg:#F3F3F1;--ur-card:#FFFFFF;--ur-card2:#E9E9EC;--ur-line:#E2E2E5;--ur-ink:#111111;--ur-ink2:#2C2C2E;
+  --ur-muted:#6E6E73;--ur-lime-txt:#5A7800;--ur-dot:#D1D1D6;--ur-plan-on:#F4FFD6;background:var(--ur-bg)}
+.phone-in.light .screenwrap{background:var(--ur-bg)}
+.phone-in.light .ur-row,.phone-in.light .ur-chip,.phone-in.light .ur-cmp,.phone-in.light .ur-oready,.phone-in.light .ur-crit span{box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.phone-in.light .ur-q{background:#FFFFFF;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.phone-in.light .ur-btn{box-shadow:0 6px 18px -6px rgba(140,180,0,.65)}
+.phone-in.light .ur-tile{border-color:rgba(0,0,0,.08)}
+.phone-in.light .scr--photo .ur-btn{box-shadow:0 0 22px -2px rgba(200,255,0,.55)}
+
+/* prototype toolbar, walkthrough, QR */
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:520px}
+.seg{display:inline-flex;align-items:center;background:#141414;border:1px solid #2A2A2C;border-radius:20px;padding:3px;gap:2px}
+.seg button{padding:6px 11px;border-radius:16px;font:600 12px/1 'Inter',sans-serif;color:var(--ink2);transition:.14s}
+.seg button.on{background:var(--ink);color:#000}
+.demo-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:20px;background:var(--accent);color:var(--on-accent);
+  font:700 12px/1 'Inter',sans-serif}
+.demo-cap{width:390px;max-width:calc(100vw - 24px);background:#141414;border:1px solid var(--hair);border-radius:16px;padding:14px 14px 12px;
+  display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
+.demo-cap .bar{position:absolute;left:0;top:0;right:0;height:3px;background:#262628}
+.demo-cap .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s linear}
+.demo-cap p{flex:1;font-size:13.5px;line-height:1.45;color:var(--ink);margin:0;font-weight:500}
+.demo-cap button{font:700 12px/1 'Inter',sans-serif;color:var(--ink2);padding:7px 10px;border-radius:12px;border:1px solid #333;flex:none}
+.finger{position:absolute;z-index:90;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.28);
+  border:2px solid rgba(255,255,255,.95);box-shadow:0 4px 14px rgba(0,0,0,.35);pointer-events:none;opacity:0;left:50%;top:60%;
+  transition:left .32s cubic-bezier(.4,0,.2,1),top .32s cubic-bezier(.4,0,.2,1),opacity .2s,transform .15s}
+.finger.show{opacity:1}
+.finger.press{transform:scale(.78);background:rgba(200,255,0,.45)}
+.qr{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:10px 16px 10px 10px;text-align:left;color:#121212}
+.qr img{width:123px;height:123px;display:block;image-rendering:pixelated;border-radius:6px}
+.qr span{font-size:12.5px;line-height:1.45;color:#4A4A4F}
+.qr b{display:block;color:#121212;font-size:13.5px}
+@media(max-width:1080px){.qr{display:none}}
+
+#view-proto .tools{order:0} #view-proto .demo-cap{order:1} #view-proto .phone{order:2} #view-proto .chips{order:3}
+#view-proto .chiphint{order:4} #view-proto .qr{order:5}
+.cta-row .qr{order:2}
+/* on a phone: the prototype is the screen */
+@media(max-width:500px){
+  #view-proto .phonecol{padding:0 0 28px;gap:14px}
+  #view-proto .phone{width:100vw;height:calc(100svh - 58px);min-height:640px;border:0;border-radius:0;box-shadow:none;order:1}
+  #view-proto .phone-in{border-radius:0}
+  #view-proto .island,#view-proto .sbar,#view-proto .homebar{display:none}
+  #view-proto .scr-top{padding-top:18px}
+  #view-proto .scr--pay .scr-top,#view-proto .scr--welcome .scr-top{padding-top:0}
+  #view-proto .scr-foot{padding-bottom:18px}
+  #view-proto .ur-x{top:12px}
+  #view-proto .ur-oh{margin-top:56px}
+  #view-proto .tools{order:3;padding:0 12px}
+  #view-proto .demo-cap{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-width:none;z-index:95}
+  #view-proto .chips{order:4;padding:0 12px}
+  #view-proto .chiphint{order:5}
+}
+
+.herobtns{display:flex;justify-content:center;margin-top:30px}
+.ghostbtn{display:inline-flex;align-items:center;gap:10px;background:#141414;border:1px solid var(--hair2);color:var(--ink);font-size:14px;
+  font-weight:700;padding:9px 20px 9px 9px;border-radius:30px;transition:.16s}
+.ghostbtn:hover{border-color:rgba(200,255,0,.5)}
+.ghostbtn .pl{width:30px;height:30px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.ghostbtn .pl svg{width:12px;height:12px;fill:#000;margin-left:2px}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:470px;margin:0 auto}
+.chip{padding:7px 13px;border-radius:20px;border:1px solid #2A2A2C;background:#141414;
+  font:600 12px/1 'Inter',sans-serif;color:var(--ink2);transition:.14s}
+.chip:hover{color:var(--ink);border-color:#444}
+.chip.offer{border-style:dashed;border-color:var(--accent);color:var(--accent-lift)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#000;border-style:solid}
+.chiphint{text-align:center;font-size:11px;color:var(--ink3);margin:0;max-width:430px}
+
+/* ============ the short panel ============ */
+.pn{padding:30px 30px 60px}
+.pn-n{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.pn-n.ctx{color:var(--panel-muted)}
+.pn-t{font:700 23px/1.2 'Montserrat',sans-serif;letter-spacing:-.025em;margin:8px 0 0;color:var(--panel-ink)}
+.pn-hyp{font-size:15px;line-height:1.62;color:#2E3033;margin:16px 0 0}
+.pn-hyp b{font-weight:700;color:var(--panel-ink)}
+.pn-out{margin-top:22px;border-top:1px solid var(--panel-line);padding-top:18px}
+.pn-out .lab{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--panel-muted)}
+.pn-out .v{font:700 31px/1 'Montserrat',sans-serif;letter-spacing:-.035em;color:var(--accent-ink);margin-top:7px}
+.pn-kept{margin-top:22px;font-size:12.5px;line-height:1.55;color:var(--panel-muted)}
+.pn-kept b{color:#2E3033;font-weight:700}
+.pn-foot{font-size:11.5px;line-height:1.55;color:var(--panel-muted);border-top:1px solid var(--panel-line);
+  padding-top:14px;margin-top:26px}
+.pn-sep{height:1px;background:var(--panel-line);margin:26px 0}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-in">
+    <div class="nav-brand">
+      <img src="img/icon.png" alt="Unreels">
+      <b>Growth Audit</b><span>· Unreels</span>
+    </div>
+    <div class="nav-links">
+      <button class="on" data-view="over">Overview</button>
+      <button data-view="proto">Prototype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Growth Audit · November 2026</div>
+    <h1>Unreels</h1>
+    <p class="lede">Five ideas to unlock more revenue from the traffic you already have.</p>
+    <div class="meta">Prepared by <b>Adapty</b> · based on your live iOS flow and your App Store listing</div>
+    <div class="herobtns"><button class="ghostbtn" data-demo><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>Watch the 30-second walkthrough</button></div>
+    <div class="stats">
+      <div class="stat"><b>30,000+</b><span>apps run subscriptions<br>on Adapty</span></div>
+      <div class="stat"><b>5</b><span>ideas, each rebuilt<br>as a working screen</span></div>
+      <div class="stat"><b>0</b><span>design changes<br>to your art direction</span></div>
+    </div>
+
+    <div class="fb">
+      <div class="fb-k">Built in Adapty Flow Builder</div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Millions of dollars</b> in subscription revenue pass through Flow Builder every month.</p>
+      </div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Nearly 500 apps</b> actively build their paywalls and onboarding in it — plenty of them past $100K MRR.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">What this is</div>
+    <h2>We went through Unreels the way a new user does, then rebuilt the parts we think are leaving money on the table.</h2>
+    <p class="body">Adapty powers subscriptions for <b>30,000+ apps</b>, so we see what moves conversion and revenue across the market, not inside one app. We pointed that at Unreels: walked your onboarding from the first screen to the paywall, read your App Store listing and its price list, and looked for gaps between what you already have and what you show people.</p>
+    <p class="body">Your flow is already strong. It asks good questions and has a loader and a payoff. Most of what follows is about making those answers show up later in the flow. There are five ideas. Each is a hypothesis you can A/B test, and each is built into a clickable prototype. <b>The prototype uses your design, not ours.</b></p>
+
+    <div class="notes">
+      <div class="note">
+        <h4>We did not redesign your app</h4>
+        <p>Every screen in the prototype is yours: the black canvas, the glowing lime button, the photo tiles, the gradient loader bars, the plan cards with “Экономия 89%”. What changes is what those screens say back to the user, plus one extra screen when the paywall closes.</p>
+      </div>
+      <div class="note">
+        <h4>You may have tested some of this</h4>
+        <p>We are working from the outside, so we cannot see your experiment history. If you have already run one of these, tell us and we will go deeper on the rest instead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">The five ideas</div>
+    <h2>Ranked by what we would test first.</h2>
+    <p class="body">Each one links straight to the screen in the prototype.</p>
+
+    <div class="ideas">
+      <button class="idea" data-jump="offer">
+        <span class="no">01</span>
+        <span>
+          <h3>Offer the monthly plan when the paywall closes</h3>
+          <p>We saw no second offer behind the paywall’s X. Your store already sells Monthly at ₪69.90. Paying weekly at ₪34.90 comes to about ₪151 a month, so monthly costs 54% less. That makes a real offer for someone who said no to a full year, with nothing invented.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>ARPU +10–15%</b><span>second chance</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">02</span>
+        <span>
+          <h3>Make the paywall headline their goal</h3>
+          <p>Four screens ask who they are, what they film and what they want from it. Then the paywall says “Выбери свой план” to everyone. A beauty blogger who picked “Рост аудитории” should read that back, with her niche above it.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +15–20%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">03</span>
+        <span>
+          <h3>Put 4.7 and 1M users next to the price</h3>
+          <p>Your laurels with 4.7 and 1M users sit on the very first screen and nowhere after it. By the time someone reaches the plans, ten screens later, a single quote is the only proof left on screen.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="loader">
+        <span class="no">04</span>
+        <span>
+          <h3>Let the loader say what it is doing for them</h3>
+          <p>“Шаблоны подобраны” and “Креативный профиль настроен” read the same whatever someone answered. Name their niche, the feature they picked and their role, and choose the quote by role. Марина’s five new clients suit a business owner, and Елена’s psychology practice suits a personal brand.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="payoff">
+        <span class="no">05</span>
+        <span>
+          <h3>Show the criteria behind “660 templates”</h3>
+          <p>The payoff screen says “660 шаблонов под твои критерии” but never shows the criteria. List their niche, role and goal under the number, and lead the grid with the feature they chose to try first.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–20%</b><span>to purchase</span></span>
+      </button>
+    </div>
+
+    <div class="band">
+      <div class="txt">
+        <div class="lab">Potential outcome</div>
+        <p>Together these five make your onboarding answers show up at the moment of decision, and they give anyone who says no to a year a cheaper option that is already in your store.</p>
+      </div>
+      <div class="nums">
+        <div><b>+20%</b><span>CR to purchase</span></div>
+        <div><b>+25%</b><span>ARPU</span></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <div class="qr"><img src="img/qr.svg" alt="QR code for the prototype"><span><b>Or open it on your phone</b>Scan to try the flow in your hand.</span></div>
+      <button class="bigbtn" data-view="proto">Open the prototype
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="wrap">
+    Impact ranges are Adapty's expected effect from teardowns and A/B tests across subscription apps — not measured lift for Unreels. Every price, rating, quote and claim here and in the prototype comes from Unreels’ own App Store listing (US and Israel storefronts) and its in-app screens. Prices are shown in shekels as they appear on your paywall.
+  </div>
+</div>
+</div><!-- /view-over -->
+
+<!-- ======================= PROTOTYPE ======================= -->
+<div class="view" id="view-proto">
+<div class="stage">
+  <div class="phonecol">
+    <div class="tools" id="tools">
+      <div class="seg" id="segLang"><button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button></div>
+      <div class="seg" id="segTheme"><button data-theme="light">Light</button><button data-theme="dark" class="on">Dark</button></div>
+      <button class="demo-btn" id="demoBtn"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>30-sec walkthrough</button>
+    </div>
+    <div class="phone">
+      <div class="phone-in" id="phoneIn">
+        <div class="island"></div>
+        <div class="sbar" id="sbar">
+          <span>9:41</span>
+          <span class="glyphs">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7.5" width="3" height="3.5" rx="1"/><rect x="4.5" y="5.5" width="3" height="5.5" rx="1"/><rect x="9" y="3" width="3" height="8" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.5 5.6 7.9a3.4 3.4 0 0 1 4.8 0L8 10.5Zm0-5.6a6.4 6.4 0 0 0-4.5 1.9L1.7 4.9a9 9 0 0 1 12.6 0l-1.8 1.9A6.4 6.4 0 0 0 8 4.9Z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="20" height="10.8" rx="3" stroke="currentColor" stroke-opacity=".5"/><rect x="2.2" y="2.2" width="16.5" height="7.6" rx="1.8" fill="currentColor"/><path d="M22.3 4.1v3.8a2 2 0 0 0 0-3.8Z" fill="currentColor" fill-opacity=".5"/></svg>
+          </span>
+        </div>
+        <div class="homebar" id="homebar"></div>
+        <div class="finger" id="finger"></div>
+        <div class="screenwrap">
+
+<!-- WELCOME -->
+<section class="scr scr--photo scr--welcome" data-id="welcome" data-photo="1">
+  <div class="ur-wphoto"><img src="img/welcome.jpg?v=3" alt=""></div>
+  <div class="scr-top" style="padding:0"></div>
+  <div class="scr-body dock">
+    <div style="margin-top:auto">
+      <h2 class="ur-wh" data-th="wel.h"></h2>
+      <p class="ur-wsub" data-t="wel.sub"></p>
+      <div class="ur-laurel">
+        <svg viewBox="0 0 30 58"><use href="#laurel"/></svg>
+        <div><b>4.7</b><span data-t="users"></span></div>
+        <svg class="r" viewBox="0 0 30 58"><use href="#laurel"/></svg>
+      </div>
+    </div>
+  </div>
+  <div class="scr-foot" style="padding-top:22px"><button class="ur-btn" data-go="role" data-t="wel.cta"></button></div>
+</section>
+
+<!-- ROLE -->
+<section class="scr" data-id="role">
+  <div class="scr-top"><h2 class="ur-h" data-th="role.h"></h2></div>
+  <div class="scr-body dock"><div class="ur-rows tight" id="roleList"></div><div class="ur-dots" style="margin-top:auto;padding-top:24px" data-dots="3"></div></div>
+  <div class="scr-foot" style="height:96px"></div>
+</section>
+
+<!-- NICHE -->
+<section class="scr" data-id="niche">
+  <div class="scr-top"><h2 class="ur-h" data-th="niche.h"></h2></div>
+  <div class="scr-body" style="-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)"><div class="ur-chips" id="nicheList"></div><div style="height:12px"></div></div>
+  <div class="scr-foot"><div class="ur-dots" style="margin-top:0" data-dots="4"></div><button class="ur-btn" id="nicheBtn" data-go="goals" data-t="cont"></button></div>
+</section>
+
+<!-- GOALS -->
+<section class="scr" data-id="goals">
+  <div class="scr-top"><h2 class="ur-h" data-th="goals.h"></h2></div>
+  <div class="scr-body dock"><div class="ur-rows" id="goalList"></div><div class="ur-dots" style="margin-top:auto;padding-top:24px" data-dots="5"></div></div>
+  <div class="scr-foot" style="height:96px"></div>
+</section>
+
+<!-- TRY FIRST -->
+<section class="scr" data-id="tryfirst">
+  <div class="scr-top"><h2 class="ur-h" data-th="try.h"></h2></div>
+  <div class="scr-body"><div class="ur-tiles" id="tryList"></div></div>
+  <div class="scr-foot"><div class="ur-dots" style="margin-top:0" data-dots="5"></div><button class="ur-btn" data-go="loader" data-t="cont"></button></div>
+</section>
+
+<!-- LOADER -->
+<section class="scr scr--load" data-id="loader">
+  <div class="scr-top"><h2 class="ur-lh" data-th="load.h"></h2></div>
+  <div class="scr-body">
+    <div class="ur-bars" id="bars"></div>
+    <div class="ur-q"><div class="ur-stars">★★★★★</div><p id="qText"></p><b id="qWho"></b></div>
+  </div>
+  <div class="scr-foot"><p class="ur-ready" data-t="load.done"></p><button class="ur-btn" data-go="payoff" data-t="cont"></button></div>
+</section>
+
+<!-- PAYOFF -->
+<section class="scr" data-id="payoff">
+  <div class="scr-top" style="padding-top:58px"></div>
+  <div class="scr-body">
+    <div class="ur-tgrid" id="tplGrid"></div>
+    <div class="ur-big">660</div>
+    <div class="ur-bigs" data-th="po.h"></div>
+    <div class="ur-crit" id="crit"></div>
+    <div style="height:8px"></div>
+  </div>
+  <div class="scr-foot"><button class="ur-btn" data-go="paywall" data-t="cont"></button></div>
+</section>
+
+<!-- PAYWALL -->
+<section class="scr scr--photo scr--pay" data-id="paywall" data-photo="1">
+  <div class="ur-pphoto"><img src="img/collage.jpg?v=3" alt=""></div>
+  <button class="ur-x" id="payClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div class="scr-top"></div>
+  <div class="scr-body dock">
+    <div style="margin-top:auto;display:flex;flex-direction:column">
+      <span class="ur-pill" id="payPill"></span>
+      <h2 class="ur-payh" id="payH"></h2>
+      <p class="ur-paysub" data-t="pw.sub"></p>
+      <div class="ur-proof">
+        <svg viewBox="0 0 30 58"><use href="#laurel"/></svg>
+        <b>4.7</b><span><i class="st" style="font-style:normal">★★★★★</i><span data-t="users"></span></span>
+        <svg class="r" viewBox="0 0 30 58"><use href="#laurel"/></svg>
+      </div>
+      <div class="ur-pq"><p id="pqText"></p><b id="pqWho"></b></div>
+      <div class="ur-pdots" id="pqDots"><i class="on"></i><i></i><i></i></div>
+      <div class="ur-plans" id="planList">
+        <button class="ur-plan" data-v="year"><span class="ur-save" data-t="pw.save"></span><span class="ur-radio"><i></i></span>
+          <span class="nm"><span class="t" data-t="pw.year"></span><span class="s" data-t="pw.free"></span></span><span class="p" data-t="pw.yp"></span></button>
+        <button class="ur-plan" data-v="week"><span class="ur-radio"><i></i></span>
+          <span class="nm"><span class="t" data-t="pw.week"></span><span class="s" data-t="pw.free"></span></span><span class="p" data-t="pw.wp"></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="scr-foot">
+    <button class="ur-btn sc" id="payCta" data-t="pw.cta"></button>
+    <p class="ur-helper" id="payHelp"></p>
+    <div class="ur-legal"><a data-t="lg.terms"></a><a data-t="lg.priv"></a><a data-t="lg.rest"></a></div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="scr scr--offer sheet" data-id="offer">
+  <button class="ur-x" id="offClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div class="scr-top" style="padding-top:0"><h2 class="ur-oh" data-th="of.h"></h2><p class="ur-osub" data-t="of.sub"></p></div>
+  <div class="scr-body">
+    <div class="ur-cmp">
+      <div class="row"><span data-t="of.r1"></span><b>₪151</b></div>
+      <div class="trk"><i class="w"></i></div>
+      <div class="row"><span data-t="of.r2"></span><b>₪69.90</b></div>
+      <div class="trk"><i class="m"></i></div>
+      <div class="lessrow"><span class="less" data-t="of.less"></span><small data-th="of.math"></small></div>
+    </div>
+    <div class="ur-oready" id="offReady"></div>
+    <div class="ur-plan on"><span class="ur-radio"><i></i></span>
+      <span class="nm"><span class="t" data-t="of.plan"></span><span class="s mut" data-t="of.nt"></span></span><span class="p" data-t="of.pp"></span></div>
+  </div>
+  <div class="scr-foot">
+    <button class="ur-btn sc" id="offerCta" data-t="of.cta"></button>
+    <p class="ur-helper" data-t="of.help"></p>
+    <div class="ur-legal"><a data-t="lg.terms"></a><a data-t="lg.priv"></a><a data-t="lg.rest"></a></div>
+  </div>
+</section>
+
+<!-- DONE (stand-in for the App Store purchase sheet) -->
+<section class="scr" data-id="done">
+  <div class="scr-top"></div>
+  <div class="scr-body"><div class="ur-done"><span class="c"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><h2 data-t="done.h"></h2><p id="doneSub"></p></div></div>
+  <div class="scr-foot"><button class="ur-btn" id="doneBtn" data-t="done.cta"></button></div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap hidden" id="demoCap"><div class="bar"><i id="demoProg"></i></div><p id="demoTxt"></p><button id="demoStop">Stop</button></div>
+    <div class="chips" id="chips"></div>
+    <p class="chiphint">Jump to any screen — answers already filled in.</p>
+    <div class="qr"><img src="img/qr.svg" alt="QR code for this prototype"><span><b>Open it on your phone</b>Scan to try the flow in your hand.</span></div>
+  </div>
+  <div class="panelcol"><div class="pn" id="panel"></div></div>
+</div>
+</div><!-- /view-proto -->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="laurel">
+      <path d="M24 56C12 50 5 38 6 22" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <ellipse cx="4.5" cy="18" rx="3.2" ry="7" transform="rotate(-8 4.5 18)"/>
+      <ellipse cx="13" cy="15" rx="3" ry="6.5" transform="rotate(38 13 15)"/>
+      <ellipse cx="4" cy="30" rx="3.2" ry="7" transform="rotate(-28 4 30)"/>
+      <ellipse cx="13" cy="27.5" rx="3" ry="6.5" transform="rotate(48 13 27.5)"/>
+      <ellipse cx="7" cy="42" rx="3.2" ry="7" transform="rotate(-48 7 42)"/>
+      <ellipse cx="16.5" cy="38.5" rx="3" ry="6.5" transform="rotate(60 16.5 38.5)"/>
+      <ellipse cx="15" cy="52" rx="3.2" ry="6.5" transform="rotate(-68 15 52)"/>
+    </g>
+  </defs>
+</svg>
+
+<script>
+/* ================= copy, per language (phone screens only) ================= */
+var LANGS = ['en','ru'];
+var T = {
+ 'wel.h':  ['Your perfect <span class="lime">pro</span>&#8209;level edit','Твой идеальный монтаж уровня <span class="lime">pro</span>'],
+ 'wel.sub':['Every time you need it','Каждый раз, когда нужно'],
+ 'users':  ['1M users','1M users'],
+ 'wel.cta':["LET'S START!",'ДАВАЙ НАЧНЕМ!'],
+ 'cont':   ['CONTINUE','ПРОДОЛЖИТЬ'],
+ 'role.h': ['What best<br>describes you?','Что лучше всего<br>тебя описывает?'],
+ 'niche.h':['What is your content about?','О чём твой контент?'],
+ 'goals.h':['What are your goals?','Какие у тебя цели?'],
+ 'try.h':  ['What will you<br>try first?','Что попробуешь<br>первым?'],
+ 'load.h': ['Tailoring it<br>to you…','Адаптируем<br>под тебя…'],
+ 'load.done':['All set!','Всё готово!'],
+ 'l1':     ['Templates for {x} picked','Шаблоны под {x} подобраны'],
+ 'l2':     ['First up: {x}','Первым откроем: {x}'],
+ 'l3':     ['Beats for: {x}','Биты под цель: {x}'],
+ 'l4':     ['Creative profile: {x}','Креативный профиль: {x}'],
+ 'po.h':   ['templates for your<br>criteria','шаблонов под твои<br>критерии'],
+ 'po.first':['First up','Начнём с'],
+ 'pw.sub': ['Choose your plan','Выбери свой план'],
+ 'pw.year':['Year','Год'], 'pw.week':['Week','Неделя'],
+ 'pw.free':['3 days free','3 дня бесплатно'],
+ 'pw.yp':  ['₪3.83 / week','₪3.83 / неделю'], 'pw.wp':['₪34.90 / week','₪34.90 / неделю'],
+ 'pw.save':['Save 89%','Экономия 89%'],
+ 'pw.cta': ['Try 3 days free','Попробовать 3 дня бесплатно'],
+ 'pw.hY':  ['3 days free, then ₪199.90 a year','3 дня бесплатно, далее ₪199.90 в год'],
+ 'pw.hW':  ['3 days free, then ₪34.90 a week','3 дня бесплатно, далее ₪34.90 в неделю'],
+ 'lg.terms':['Terms','Правила'], 'lg.priv':['Privacy','Приватность'], 'lg.rest':['Restore','Восстановить'],
+ 'of.h':   ['Not ready for<br>a whole year?','Не готов<br>на целый год?'],
+ 'of.sub': ["Then don't pay by the week.",'Тогда не плати понедельно.'],
+ 'of.r1':  ['Weekly, over a month','Понедельно, за месяц'],
+ 'of.r2':  ['Monthly','Помесячно'],
+ 'of.less':['54% less','На 54% дешевле'],
+ 'of.math':['₪34.90 × 52 weeks ÷ 12<br>vs ₪69.90 a month','₪34.90 × 52 недели ÷ 12<br>против ₪69.90 в месяц'],
+ 'of.ready':['Your {x} templates are waiting','Шаблоны под {x} уже ждут'],
+ 'of.plan':['Month','Месяц'], 'of.nt':['No free trial','Без пробного периода'],
+ 'of.pp':  ['₪69.90 / month','₪69.90 / месяц'],
+ 'of.cta': ['Get a month for ₪69.90','Взять месяц за ₪69.90'],
+ 'of.help':['Charged today. Cancel anytime in Settings.','Списание сегодня. Отмена в любой момент в настройках.'],
+ 'done.h': ['You’re in!','Готово!'],
+ 'done.sub':['Opening your {x} templates','Открываем шаблоны под {x}'],
+ 'done.cta':['START OVER','СНАЧАЛА']
+};
+var ROLES = [
+  {k:'blogger', e:'🎥', l:['Blogger','Блогер'], q:'elena'},
+  {k:'business',e:'💼', l:['Business owner','Владелец бизнеса'], q:'marina'},
+  {k:'smm',     e:'📱', l:['SMM specialist','SMM-специалист'], q:'marina'},
+  {k:'ugc',     e:'🤝', l:['Reelmaker / UGC','Рилсмейкер / UGC'], q:'irina'},
+  {k:'brand',   e:'✨', l:['Personal brand','Личный бренд'], q:'elena'},
+  {k:'other',   e:'💡', l:['Other','Другое'], q:'irina'}
+];
+var NICHES = [
+  ['beauty','💄','Beauty','Бьюти'],['nails','💅','Nails','Маникюр'],['fashion','👗','Fashion','Мода'],['hair','💇','Hair','Волосы'],
+  ['food','🍽️','Food','Еда'],['cafe','☕','Cafés','Кафе'],['fitness','💪','Fitness','Фитнес'],['sport','⚽','Sport','Спорт'],
+  ['coach','🧠','Coaching','Коучинг'],['health','🌿','Health','Здоровье'],['medicine','🩺','Medicine','Медицина'],
+  ['life','🤳','Lifestyle','Лайфстайл'],['edu','🎓','Education','Обучение'],['market','📦','Marketplaces','Маркетплейсы'],
+  ['services','🧰','Services','Услуги'],['flowers','🌸','Flowers','Цветы'],['repair','🛠️','Renovation','Ремонт'],['family','👶','Family','Семья'],
+  ['travel','✈️','Travel','Путешествия'],['pets','🐶','Pets','Питомцы'],['humor','😄','Humor','Юмор'],['music','🎵','Music','Музыка'],['dance','💃','Dance','Танцы']
+];
+var GOALS = [
+  {k:'grow',   e:'✨', l:['Grow my audience','Рост аудитории'],          h:['Reels that grow your audience','Рилсы, которые растят аудиторию']},
+  {k:'recs',   e:'🔥', l:['Get recommended','Попасть в рекомендации'],  h:['Reels made for the recommendations','Рилсы, которые попадают в рекомендации']},
+  {k:'regular',e:'📅', l:['Post regularly','Публиковаться регулярно'],  h:['Post every week, edit in minutes','Публикуйся регулярно, монтируй за минуты']},
+  {k:'time',   e:'⏱️', l:['Less time editing','Меньше времени на монтаж'], h:['Turn hours of editing into minutes','Преврати часы монтажа в минуты']},
+  {k:'money',  e:'💰', l:['Monetize my content','Монетизация контента'], h:['Reels that bring in clients','Рилсы, которые приводят клиентов']},
+  {k:'other',  e:'💬', l:['Other','Другое'],                             h:['Your perfect pro-level edit','Твой идеальный монтаж уровня pro']}
+];
+var TRY = [
+  {k:'ai',   img:'img/try-ai.jpg',   l:['AI video generation','AI-генерация видео']},
+  {k:'look', img:'img/try-look.jpg', l:['AI look change','AI-смена образа']},
+  {k:'bg',   img:'img/try-bg.jpg',   l:['Background removal','Удаление фона']},
+  {k:'beat', img:'img/try-beat.jpg', l:['Music & beat sync','Музыка и монтаж в бит']}
+];
+/* testimonials: verbatim from their own loader and paywall, kept in Russian in every language */
+var QUOTES = {
+  marina:['Пришло пятеро клиентов за месяц, и все с одной фразой — «увидела вас в ленте».','Марина, 39'],
+  elena: ['Я психолог, а рилсы делала как школьница. Теперь контент выглядит на уровне моей практики.','Елена, 34'],
+  irina: ['Наконец-то мои рилсы выглядят так же серьёзно, как я работаю. Клиенты стали писать первыми.','Ирина · коуч']
+};
+var PQ = ['irina','marina','elena'];
+var TPL = ['img/tpl-1.jpg','img/tpl-2.jpg','img/tpl-3.jpg','img/tpl-4.jpg'];
+function byK(a,k){ for(var i=0;i<a.length;i++) if(a[i].k===k) return a[i]; }
+function nicheOf(k){ for(var i=0;i<NICHES.length;i++) if(NICHES[i][0]===k) return NICHES[i]; }
+
+/* ================= state ================= */
+var S0 = {lang:'en', theme:'dark'};
+function defaults(){ return {lang:S0.lang, theme:S0.theme, role:'blogger', niches:['beauty'], goal:'grow', tryk:'beat', plan:'year', pq:0}; }
+var S = defaults();
+function L(){ return LANGS.indexOf(S.lang); }
+function t(k,v){ var s=(T[k]||[k])[L()]; if(v) Object.keys(v).forEach(function(x){ s=s.split('{'+x+'}').join(v[x]); }); return s; }
+function nicheNames(lower){ var li=L(); var a=S.niches.slice(0,2).map(function(k){ var n=nicheOf(k)[2+li]; return lower&&S.lang==='ru'?n.toLowerCase():(lower?n.toLowerCase():n); });
+  var s=a.join(S.lang==='ru'?' и ':' & '); if(S.niches.length>2) s+=' +'+(S.niches.length-2); return s; }
+function nicheEmoji(){ return S.niches.length ? nicheOf(S.niches[0])[1] : ''; }
+
+/* ================= builders (re-run on language change) ================= */
+function buildRoles(){ var g=document.getElementById('roleList'); g.innerHTML='';
+  ROLES.forEach(function(o){ var b=document.createElement('button'); b.className='ur-row'; b.dataset.v=o.k;
+    b.innerHTML='<span>'+o.e+'</span><span>'+o.l[L()]+'</span>';
+    b.addEventListener('click',function(){ S.role=o.k; syncScreen(); setTimeout(function(){ if(cur==='role') go('niche'); },260); });
+    g.appendChild(b); }); }
+function buildNiches(){ var g=document.getElementById('nicheList'); g.innerHTML='';
+  NICHES.forEach(function(n){ var b=document.createElement('button'); b.className='ur-chip'; b.dataset.v=n[0];
+    b.innerHTML='<span>'+n[1]+'</span><span>'+n[2+L()]+'</span>';
+    b.addEventListener('click',function(){ var i=S.niches.indexOf(n[0]); if(i>-1) S.niches.splice(i,1); else S.niches.push(n[0]); syncScreen(); });
+    g.appendChild(b); }); }
+function buildGoals(){ var g=document.getElementById('goalList'); g.innerHTML='';
+  GOALS.forEach(function(o){ var b=document.createElement('button'); b.className='ur-row'; b.dataset.v=o.k;
+    b.innerHTML='<span>'+o.e+'</span><span>'+o.l[L()]+'</span>';
+    b.addEventListener('click',function(){ S.goal=o.k; syncScreen(); setTimeout(function(){ if(cur==='goals') go('tryfirst'); },260); });
+    g.appendChild(b); }); }
+function buildTry(){ var g=document.getElementById('tryList'); g.innerHTML='';
+  TRY.forEach(function(o){ var b=document.createElement('button'); b.className='ur-tile'; b.dataset.v=o.k;
+    b.innerHTML='<img src="'+o.img+'" alt=""><span>'+o.l[L()]+'</span>';
+    b.addEventListener('click',function(){ S.tryk=o.k; syncScreen(); });
+    g.appendChild(b); }); }
+function buildDots(){ document.querySelectorAll('[data-dots]').forEach(function(d){ var on=+d.dataset.dots, h='';
+  for(var i=0;i<8;i++) h+='<i class="'+(i===on?'on':'')+(i===6?' s':'')+(i===7?' xs':'')+'"></i>'; d.innerHTML=h; }); }
+function buildBars(){ var g=document.getElementById('bars'), h='';
+  for(var i=0;i<4;i++) h+='<div class="ur-bar"><div class="row"><span class="t"></span><span class="pc">0%</span><span class="ck"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></div><div class="trk"><i></i></div></div>';
+  g.innerHTML=h; }
+function applyStatic(){
+  document.documentElement.lang=S.lang;
+  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent=t(el.dataset.t); });
+  document.querySelectorAll('[data-th]').forEach(function(el){ el.innerHTML=t(el.dataset.th); });
+  buildRoles(); buildNiches(); buildGoals(); buildTry();
+}
+buildDots(); buildBars();
+
+/* ================= everything downstream reads S ================= */
+function syncScreen(){
+  var li=L(), role=byK(ROLES,S.role), goal=byK(GOALS,S.goal), tr=byK(TRY,S.tryk);
+  document.querySelectorAll('#roleList .ur-row').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.role); });
+  document.querySelectorAll('#nicheList .ur-chip').forEach(function(b){ b.classList.toggle('on', S.niches.indexOf(b.dataset.v)>-1); });
+  document.getElementById('nicheBtn').disabled=!S.niches.length;
+  document.querySelectorAll('#goalList .ur-row').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.goal); });
+  document.querySelectorAll('#tryList .ur-tile').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.tryk); });
+
+  var nn=nicheNames(true);
+  /* loader lines + quote picked by role */
+  var lines=[t('l1',{x:nn}), t('l2',{x:tr.l[li]}), t('l3',{x:goal.l[li].toLowerCase()}), t('l4',{x:role.l[li].toLowerCase()})];
+  document.querySelectorAll('#bars .ur-bar .t').forEach(function(el,i){ el.textContent=lines[i]; });
+  var q=QUOTES[role.q]; document.getElementById('qText').textContent='"'+q[0]+'"'; document.getElementById('qWho').textContent=q[1];
+
+  /* payoff: the criteria, and their first pick leads the grid */
+  var tg=document.getElementById('tplGrid');
+  tg.innerHTML='<div class="ur-tg first"><img src="'+tr.img+'" alt=""><span class="tag">'+t('po.first')+': '+tr.l[li]+'</span></div>'
+    + TPL.slice(0,3).map(function(s){ return '<div class="ur-tg"><img src="'+s+'" alt=""></div>'; }).join('');
+  var crit=S.niches.slice(0,3).map(function(k){ var n=nicheOf(k); return '<span>'+n[1]+' '+n[2+li]+'</span>'; });
+  crit.push('<span>'+role.e+' '+role.l[li]+'</span>'); crit.push('<span>'+goal.e+' '+goal.l[li]+'</span>');
+  document.getElementById('crit').innerHTML=crit.join('');
+
+  /* paywall: goal headline, niche + role pill, proof, quotes */
+  document.getElementById('payPill').textContent=nicheEmoji()+' '+(S.niches.length?nicheNames(false):'')+' · '+role.l[li];
+  document.getElementById('payH').textContent=goal.h[li];
+  var pk=PQ[S.pq], pq=QUOTES[pk];
+  document.getElementById('pqText').textContent=pq[0]; document.getElementById('pqWho').textContent=pq[1];
+  document.querySelectorAll('#pqDots i').forEach(function(d,i){ d.classList.toggle('on',i===S.pq); });
+  document.querySelectorAll('#planList .ur-plan').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.plan); });
+  document.getElementById('payHelp').textContent = S.plan==='year' ? t('pw.hY') : t('pw.hW');
+
+  document.getElementById('offReady').innerHTML='<i>'+nicheEmoji()+'</i><span>'+t('of.ready',{x:nn})+'</span>';
+  document.getElementById('doneSub').textContent=t('done.sub',{x:nn});
+}
+
+/* ================= router ================= */
+var ORDER=['welcome','role','niche','goals','tryfirst','loader','payoff','paywall','offer'];
+var LABEL={welcome:'Welcome',role:'Who you are',niche:'Niche',goals:'Goals',tryfirst:'Try first',loader:'Loader',payoff:'660 templates',paywall:'Paywall',offer:'Offer on close'};
+var scr={}, hist=[], cur='welcome', loadTimers=[], pqTimer=null;
+document.querySelectorAll('.scr').forEach(function(s){ scr[s.dataset.id]=s; });
+
+function chrome(){ var dk = S.theme==='light' && !scr[cur].dataset.photo;
+  document.getElementById('sbar').classList.toggle('dk',dk); document.getElementById('homebar').classList.toggle('dk',dk); }
+function enter(id){ chrome(); paintChips(); paintPanel(); clearLoad(); stopPq();
+  if(id==='loader') runLoader(); if(id==='paywall') runPq(); }
+function go(id,opts){
+  opts=opts||{}; if(id===cur) return;
+  var from=scr[cur], to=scr[id];
+  if(!opts.back) hist.push(cur);
+  if(from){ from.classList.remove('is-active');
+    if(!to.classList.contains('sheet') && !from.classList.contains('sheet')) from.classList.add('is-past'); }
+  if(to.classList.contains('sheet')) from.classList.add('is-active');
+  Object.keys(scr).forEach(function(k){ if(k!==id&&k!==cur) scr[k].classList.remove('is-active'); });
+  to.classList.remove('is-past'); to.classList.add('is-active');
+  cur=id; enter(id);
+}
+function jump(id){
+  var i=ORDER.indexOf(id);
+  Object.keys(scr).forEach(function(k){ scr[k].classList.add('nofx'); scr[k].classList.remove('is-active','is-past'); });
+  hist=ORDER.slice(0,i<0?0:i);
+  if(id==='offer') scr.paywall.classList.add('is-active');
+  scr[id].classList.add('is-active'); cur=id;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    Object.keys(scr).forEach(function(k){ scr[k].classList.remove('nofx'); }); }); });
+  syncScreen(); enter(id);
+}
+var chipsBuilt=false;
+function paintChips(){
+  var c=document.getElementById('chips');
+  if(!chipsBuilt){ chipsBuilt=true;
+    ORDER.forEach(function(id){ var b=document.createElement('button'); b.className='chip'+(id==='offer'?' offer':''); b.textContent=LABEL[id];
+      b.dataset.id=id; b.onclick=function(){ stopDemo(); jump(id); }; c.appendChild(b); }); }
+  c.querySelectorAll('.chip').forEach(function(b){ b.classList.toggle('on', b.dataset.id===cur); });
+}
+
+function clearLoad(){ loadTimers.forEach(clearTimeout); loadTimers=[]; }
+function runLoader(){
+  var k=demo.on?0.48:1, el=scr.loader, bars=[].slice.call(document.querySelectorAll('#bars .ur-bar'));
+  el.classList.remove('ready');
+  bars.forEach(function(b){ b.classList.remove('go','done'); var i=b.querySelector('.trk i'); i.style.transition='none'; i.style.width='0'; b.querySelector('.pc').textContent='0%'; });
+  var D=1100*k;
+  bars.forEach(function(b,n){
+    loadTimers.push(setTimeout(function(){
+      b.classList.add('go'); var i=b.querySelector('.trk i'); void i.offsetWidth;
+      i.style.transition='width '+D+'ms linear'; i.style.width='100%';
+      var t0=Date.now(), pc=b.querySelector('.pc');
+      (function tick(){ var p=Math.min(100,Math.round((Date.now()-t0)/D*100)); pc.textContent=p+'%';
+        if(p<100 && cur==='loader') loadTimers.push(setTimeout(tick,60)); else { b.classList.add('done'); } })();
+    }, 300*k + n*D));
+  });
+  loadTimers.push(setTimeout(function(){ el.classList.add('ready'); }, 300*k + 4*D + 150));
+}
+function stopPq(){ if(pqTimer){ clearInterval(pqTimer); pqTimer=null; } }
+function runPq(){ pqTimer=setInterval(function(){ S.pq=(S.pq+1)%3; syncScreen(); },3800); }
+
+/* ================= wiring ================= */
+document.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ if(!b.disabled) go(b.dataset.go); }); });
+document.querySelectorAll('#planList .ur-plan').forEach(function(b){ b.addEventListener('click',function(){ S.plan=b.dataset.v; syncScreen(); }); });
+document.getElementById('payClose').addEventListener('click',function(){ go('offer'); });
+document.getElementById('offClose').addEventListener('click',function(){ go('done'); });
+document.getElementById('payCta').addEventListener('click',function(){ go('done'); });
+document.getElementById('offerCta').addEventListener('click',function(){ go('done'); });
+document.getElementById('doneBtn').addEventListener('click',function(){ jump('welcome'); });
+
+function setSeg(id,attr,val){ document.querySelectorAll('#'+id+' button').forEach(function(b){ b.classList.toggle('on', b.dataset[attr]===val); }); }
+function setLang(l){ S.lang=l; S0.lang=l; setSeg('segLang','lang',l); applyStatic(); syncScreen(); paintPanel(); }
+function setTheme(th){ S.theme=th; S0.theme=th; document.getElementById('phoneIn').classList.toggle('light',th==='light'); setSeg('segTheme','theme',th); chrome(); }
+document.querySelectorAll('#segLang button').forEach(function(b){ b.addEventListener('click',function(){ stopDemo(); setLang(b.dataset.lang); }); });
+document.querySelectorAll('#segTheme button').forEach(function(b){ b.addEventListener('click',function(){ setTheme(b.dataset.theme); }); });
+
+/* ================= the 30-second walkthrough ================= */
+var demo={tok:0,on:false,t0:0,iv:null}, finger=document.getElementById('finger'), phoneIn=document.getElementById('phoneIn');
+function W(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+function cap(txt){ document.getElementById('demoTxt').textContent=txt; }
+async function tap(sel,tok){
+  if(demo.tok!==tok) throw 0;
+  var el=document.querySelector(sel); if(!el) return;
+  var r=el.getBoundingClientRect(), p=phoneIn.getBoundingClientRect(), z=p.width/phoneIn.offsetWidth||1;
+  finger.style.left=((r.left-p.left+r.width/2)/z)+'px'; finger.style.top=((r.top-p.top+r.height/2)/z)+'px';
+  finger.classList.add('show'); await W(380); if(demo.tok!==tok) throw 0;
+  finger.classList.add('press'); await W(120); finger.classList.remove('press'); el.click(); await W(160);
+  if(demo.tok!==tok) throw 0;
+}
+async function pause(ms,tok){ await W(ms); if(demo.tok!==tok) throw 0; }
+function startDemo(){
+  stopDemo(); var tok=++demo.tok; demo.on=true; demo.t0=Date.now();
+  var keep={lang:S.lang,theme:S.theme}; S=defaults(); S.lang=keep.lang; S.theme=keep.theme; S.niches=[];
+  applyStatic(); jump('welcome');
+  document.getElementById('demoCap').classList.remove('hidden');
+  demo.iv=setInterval(function(){ document.getElementById('demoProg').style.width=Math.min(100,(Date.now()-demo.t0)/290)+'%'; },200);
+  (async function(){
+    try{
+      cap('Your welcome screen, unchanged: 4.7 and 1M users up front.'); await pause(1500,tok);
+      await tap('[data-id=welcome] .ur-btn',tok);
+      cap('Every question you ask today stays. Who they are: a business owner.'); await pause(650,tok);
+      await tap('#roleList [data-v=business]',tok); await pause(500,tok);
+      cap('What they film: food and cafés.'); await pause(350,tok);
+      await tap('#nicheList [data-v=food]',tok); await pause(250,tok); await tap('#nicheList [data-v=cafe]',tok); await pause(300,tok);
+      await tap('#nicheBtn',tok);
+      cap('Their goal: bring in clients.'); await pause(500,tok);
+      await tap('#goalList [data-v=money]',tok); await pause(500,tok);
+      cap('And what they want to try first.'); await pause(400,tok);
+      await tap('#tryList [data-v=ai]',tok); await pause(350,tok); await tap('[data-id=tryfirst] .ur-btn',tok);
+      cap('Your loader now names their niche, pick and role, with Марина’s quote for a business owner.'); await pause(2900,tok);
+      await tap('[data-id=loader] .ur-btn',tok);
+      cap('“660 templates for your criteria”, now with the criteria shown.'); await pause(1900,tok);
+      await tap('[data-id=payoff] .ur-btn',tok);
+      cap('The paywall headline is their goal, with your 4.7 and 1M users next to the plans.'); await pause(1900,tok);
+      await tap('#planList [data-v=week]',tok); await pause(600,tok); await tap('#planList [data-v=year]',tok); await pause(500,tok);
+      cap('They close it. Second chance: your own ₪69.90 monthly, 54% less than paying weekly.'); await tap('#payClose',tok); await pause(2400,tok);
+      cap('That is the flow. Every screen is yours; jump to any of them below.');
+      finger.classList.remove('show'); await pause(2200,tok); stopDemo();
+    }catch(e){}
+  })();
+}
+function stopDemo(){ if(!demo.on) return; demo.tok++; demo.on=false; clearInterval(demo.iv); finger.classList.remove('show','press');
+  document.getElementById('demoCap').classList.add('hidden'); }
+document.getElementById('demoBtn').addEventListener('click',startDemo);
+document.getElementById('demoStop').addEventListener('click',stopDemo);
+phoneIn.addEventListener('pointerdown',function(e){ if(e.isTrusted && demo.on) stopDemo(); });
+</script>
+<script>
+/* ---- the short panel: hypothesis + potential outcome, nothing else ---- */
+var PANEL = {
+welcome:{ctx:true,t:'Welcome',
+ kept:'Untouched. The full-bleed photo, “pro” in lime, the laurels with 4.7 and 1M users, and the glowing lime button. Your next two intro screens (“500+ цепляющих видео-шаблонов” and “Твой первый рилс — за минуту”) and the weeks chart before the loader stay exactly as they are. We left them out here only to keep the prototype short.'},
+role:{ctx:true,t:'What best describes you?',
+ kept:'Untouched. All six options in your order, one tap moves on. The answer now picks the loader quote (idea 04) and appears on the payoff and the paywall pill.'},
+niche:{ctx:true,t:'What is your content about?',
+ kept:'Untouched. All 23 emoji chips in your order. The niche now shows up on the loader, the payoff, the paywall and the offer.'},
+goals:{ctx:true,t:'What are your goals?',
+ kept:'Untouched. Six options, one tap moves on. The goal now becomes the paywall headline (idea 02).'},
+tryfirst:{ctx:true,t:'What will you try first?',
+ kept:'Untouched. Your four photo tiles with the lime border. The pick now leads the payoff grid (idea 05) and names a loader line.'},
+loader:{n:4,t:'Let the loader say what it is doing for them',
+ hyp:'Try naming their niche, first pick, goal and role in your four lines, and choosing the quote by role, <b>because a loader only earns its wait when what it says is about the person watching it</b>. Go back and change the role. The quote changes too.',
+ kept:'Your “Адаптируем под тебя…” headline, the lime-to-pink gradient bars with live percentages, the pink check circles, the star card and “Всё готово!” above the button. The quotes are yours, verbatim.',
+ out:'CR +10–15%'},
+payoff:{n:5,t:'Show the criteria behind “660 templates”',
+ hyp:'Try listing their niche, role and goal under your 660 and leading the grid with the feature they picked, <b>because “под твои критерии” is a promise the screen never shows</b>.',
+ kept:'Your 2×2 template grid, the big lime 660 and your headline wording. The number stays yours; we did not invent a count per niche.',
+ out:'CR +10–20%'},
+paywall:{n:2,t:'Make the paywall headline their goal',
+ hyp:'Try their goal as the headline, with their niche and role in a pill above it, and keep “Выбери свой план” as the line underneath, <b>because the paywall is the one screen that today ignores all four answers</b>. Pick a different goal and the headline changes with it.',
+ n2:3, hyp2:'Try your 4.7 and 1M users laurels next to the plans, <b>because today they are on the first screen only, and a single quote is all that is left by the time someone sees the price</b>.',
+ out2:'CR +10–15%',
+ kept:'The template collage, the X top-left, the star quote carousel, both plan cards with “3 дня бесплатно” in lime, the “Экономия 89%” badge, ₪3.83 and ₪34.90 a week, the glowing button and the “далее ₪199.90 в год” line.',
+ out:'CR +15–20%'},
+offer:{n:1,t:'Offer the monthly plan when the paywall closes',
+ hyp:'Try a second screen on the X that offers your ₪69.90 monthly plan with no trial, <b>because someone who passed on a year is not lost, and paying weekly would cost them about ₪151 a month</b>. Both prices are in your store today, so nothing here is a discount we made up.',
+ kept:'Your black canvas, the X, your plan card and radio, the gradient bars from your loader used as the comparison, the glowing button and your legal row. The “54% less” is ₪34.90 × 52 ÷ 12 against ₪69.90.',
+ out:'ARPU +10–15%'},
+done:{ctx:true,t:'Purchase',
+ kept:'A stand-in for the App Store purchase sheet. In your app this is where the template feed opens, already filtered to their niche.'}
+};
+
+function outBlock(lab,val){ return '<div class="pn-out"><div class="lab">'+lab+'</div><div class="v">'+val+'</div></div>'; }
+function paintPanel(){
+  var d=PANEL[cur]; if(!d) return;
+  var h='';
+  if(d.ctx){
+    h += '<div class="pn-n ctx">Context · no change proposed</div><h3 class="pn-t">'+d.t+'</h3>'
+       + '<div class="pn-kept">'+d.kept+'</div>';
+  } else {
+    h += '<div class="pn-n">Idea '+d.n+' of 5</div><h3 class="pn-t">'+d.t+'</h3>'
+       + '<p class="pn-hyp">'+d.hyp+'</p>'
+       + outBlock('Potential outcome · based on Adapty data', d.out);
+    if(d.hyp2){
+      h += '<div class="pn-sep"></div>'
+         + '<div class="pn-n">Idea '+d.n2+' of 5</div><h3 class="pn-t">Put 4.7 and 1M users next to the price</h3>'
+         + '<p class="pn-hyp" style="margin-top:12px">'+d.hyp2+'</p>'
+         + outBlock('Potential outcome · based on Adapty data', d.out2);
+    }
+    h += '<div class="pn-kept"><b>Your design, unchanged.</b> '+d.kept+'</div>';
+  }
+  if(S.lang!=='en') h += '<div class="pn-kept"><b>Language.</b> Screens are shown in Russian, as your app ships them. Prices stay in shekels as published; quotes are verbatim.</div>';
+  else h += '<div class="pn-kept"><b>Language.</b> English is our translation of your Russian screens. Prices stay in shekels as published; the quotes stay verbatim in Russian.</div>';
+  h += '<div class="pn-foot">Ranges are Adapty’s expected effect from tests across 30,000+ subscription apps — not measured lift for Unreels. '
+     + 'Prices, ratings, quotes and claims come from your own published material.</div>';
+  document.getElementById('panel').innerHTML = h;
+}
+
+/* ---- views, jumps from the overview ---- */
+function showView(v){
+  if(v!=='proto') stopDemo();
+  document.querySelectorAll('.view').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('view-'+v).classList.add('on');
+  document.querySelectorAll('.nav-links button[data-view]').forEach(function(b){ b.classList.toggle('on', b.dataset.view===v); });
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.view); }); });
+document.querySelectorAll('.idea[data-jump]').forEach(function(b){
+  b.addEventListener('click',function(){ showView('proto'); jump(b.dataset.jump); });
+});
+document.querySelectorAll('[data-demo]').forEach(function(b){ b.addEventListener('click',function(){ showView('proto'); startDemo(); }); });
+
+applyStatic();
+scr.welcome.classList.add('is-active');
+syncScreen(); chrome(); paintChips(); paintPanel();
+if(/[?&]open=proto/.test(location.search)) showView('proto');
+</script>
+</body>
+</html>
